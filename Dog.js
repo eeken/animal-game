@@ -6,7 +6,7 @@ module.exports = class Dog extends Animal{
     name: 'Dog',
     legs: 4,
     model: "adult",
-    price: 180,
+    price: 90,
     regNo: "?",
   };
 

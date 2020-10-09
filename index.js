@@ -13,7 +13,9 @@ const Pig = require("./Pig");
 const Sheep = require("./Sheep");
 const DanceDecorator = require("./DanceDecorator");
 
+// main function where most of the logic take place
 async function main() {
+  // function to buy different type of animals
   function buyAnimal(typeOfAnimal) {
     if (typeOfAnimal == "cat") {
       typeOfAnimal = new Cat(4, myFarm);
@@ -39,18 +41,26 @@ async function main() {
     if (typeOfAnimal == "sheep") {
       typeOfAnimal = new Sheep(4, myFarm);
     }
-    myFarm.animals.push(typeOfAnimal);
-    console.log(myFarm.animals);
-    newPerson.money -= typeOfAnimal.price;
-    console.log(
-      "You have bought a " +
-        typeOfAnimal.constructor.name.toLowerCase() +
-        ". You now have " +
-        newPerson.money +
-        "$ left."
-    );
+    if (newPerson.money >= typeOfAnimal.price) {
+      myFarm.animals.push(typeOfAnimal);
+      newPerson.money -= typeOfAnimal.price;
+      console.log(
+        "You have bought a " +
+          typeOfAnimal.constructor.name.toLowerCase() +
+          ". You now have " +
+          newPerson.money +
+          "$ left."
+      );
+    } else {
+      console.log(
+        "You don't have enough money to buy a " +
+          typeOfAnimal.constructor.name.toLowerCase() +
+          "!"
+      );
+    }
   }
 
+  // teach animal to dance
   function teachAnimal(typeOfAnimal) {
     let i = myFarm.animals.findIndex(
       (animal) => animal.constructor.name === typeOfAnimal
@@ -63,6 +73,7 @@ async function main() {
     }
   }
 
+  // make animal sound
   function makeSound(typeOfAnimal) {
     let i = myFarm.animals.findIndex(
       (animal) => animal.constructor.name === typeOfAnimal
@@ -74,6 +85,7 @@ async function main() {
     }
   }
 
+  // welcome message and main menu
   console.log("Welcome to the farmgame!");
 
   /*const personName = await prompt("Vad heter du? ");
@@ -202,4 +214,5 @@ async function main() {
   } while (key != 4);
 }
 
+// running main function
 main();

@@ -1,5 +1,4 @@
 module.exports = class DanceDecorator {
-  
   constructor() {
     throw new Error("Static class!");
   }
